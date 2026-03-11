@@ -97,7 +97,15 @@ export function EventDetailModal({ event, category, isOpen, onClose }: EventDeta
                 <Clock className="w-3.5 h-3.5 text-muted-foreground" />
               </div>
               <p className="text-foreground text-sm">
-                {event.allDay ? 'Dia inteiro' : `${event.startTime || ''} ${event.endTime ? '- ' + event.endTime : ''}`}
+                {event.allDay ? 'Dia inteiro' : (() => {
+                  const formatTime = (t?: string | null) => {
+                    if (!t) return '';
+                    const parts = t.split(':');
+                    if (parts.length < 2) return t;
+                    return `${parts[0]}h${parts[1]}`;
+                  };
+                  return `${formatTime(event.startTime)}${event.endTime ? ' - ' + formatTime(event.endTime) : ''}`;
+                })()}
               </p>
             </div>
           </div>

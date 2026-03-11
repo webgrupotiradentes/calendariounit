@@ -13,13 +13,14 @@ interface CalendarGridProps {
   categories: Category[];
   selectedDate: Date | null;
   onSelectDate: (date: Date) => void;
+  onEventClick: (event: CalendarEvent) => void;
   activeCategories: string[];
 }
 
 const WEEKDAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
 export function CalendarGrid({
-  currentDate, events, categories, selectedDate, onSelectDate, activeCategories,
+  currentDate, events, categories, selectedDate, onSelectDate, onEventClick, activeCategories,
 }: CalendarGridProps) {
   const days = useMemo(() => {
     const start = startOfWeek(startOfMonth(currentDate), { locale: ptBR });
@@ -62,19 +63,19 @@ export function CalendarGrid({
           const isDayToday = isToday(day);
 
           return (
-            <button
+            <div
               key={index}
               onClick={() => onSelectDate(day)}
               className={cn(
-                "relative min-h-[80px] sm:min-h-[100px] p-1.5 sm:p-2 border-b border-r border-border/30 transition-colors text-left",
-                "hover:bg-muted/50 focus:outline-none focus:bg-muted/50",
+                "relative min-h-[80px] sm:min-h-[100px] p-1.5 sm:p-2 border-b border-r border-border/30 transition-colors text-left group cursor-pointer",
+                "hover:bg-muted/50 focus-within:bg-muted/50",
                 !isCurrentMonth && "opacity-30 bg-muted/20",
                 isSelected && "bg-primary/5 ring-1 ring-inset ring-primary/30",
               )}
             >
               <span
                 className={cn(
-                  "inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-medium",
+                  "inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-medium transition-transform group-hover:scale-110",
                   isDayToday && "bg-primary text-primary-foreground font-bold",
                   isSelected && !isDayToday && "bg-secondary text-foreground",
                   !isDayToday && !isSelected && "text-foreground"
@@ -85,28 +86,32 @@ export function CalendarGrid({
 
               {/* Event indicators */}
               <div className="mt-0.5 space-y-0.5">
-                {dayEvents.slice(0, 2).map((event, i) => {
+                {dayEvents.slice(0, 3).map((event, i) => {
                   const category = getCategoryById(event.categoryId);
                   return (
-                    <div
-                      key={i}
-                      className="text-[10px] leading-tight font-medium px-1.5 py-0.5 rounded truncate"
+                    <button
+                      key={event.id}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onEventClick(event);
+                      }}
+                      className="w-full text-[10px] leading-tight font-medium px-1.5 py-0.5 rounded truncate text-left transition-all hover:brightness-90 active:scale-95"
                       style={{
                         backgroundColor: category ? `hsl(${category.color} / 0.15)` : 'hsl(var(--muted))',
                         color: category ? `hsl(${category.color})` : 'hsl(var(--muted-foreground))'
                       }}
                     >
                       {event.title}
-                    </div>
+                    </button>
                   );
                 })}
-                {dayEvents.length > 2 && (
-                  <span className="text-[10px] text-muted-foreground font-medium px-1.5">
-                    +{dayEvents.length - 2}
+                {dayEvents.length > 3 && (
+                  <span className="text-[9px] text-muted-foreground font-medium px-1.5 block">
+                    +{dayEvents.length - 3} mais
                   </span>
                 )}
               </div>
-            </button>
+            </div>
           );
         })}
       </div>

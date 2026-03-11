@@ -186,8 +186,8 @@ const Index = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* IES (Macros) - Toggle único via botões */}
-          <div className="flex items-center gap-1.5 overflow-x-auto hide-scrollbar">
+          {/* IES (Macros) - Toggle Group UI */}
+          <div className="flex bg-muted/40 p-1 rounded-2xl border border-border/40 gap-1.5 max-w-full overflow-x-auto hide-scrollbar">
             {macros.map(mac => {
               const isActive = activeMacros.includes(mac.id);
               return (
@@ -195,10 +195,10 @@ const Index = () => {
                   key={mac.id}
                   onClick={() => handleToggleMacro(mac.id)}
                   className={cn(
-                    'flex items-center h-9 px-4 rounded-full text-sm font-medium border transition-all whitespace-nowrap',
+                    'relative h-8 px-4 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-300',
                     isActive
-                      ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-                      : 'bg-muted/60 text-foreground border-border hover:bg-muted'
+                      ? 'bg-card text-primary shadow-apple border border-border/40 scale-105'
+                      : 'text-muted-foreground hover:bg-muted/80'
                   )}
                 >
                   {mac.name}
@@ -303,6 +303,7 @@ const Index = () => {
               categories={categories}
               selectedDate={selectedDate}
               onSelectDate={handleSelectDate}
+              onEventClick={setSelectedEvent}
               activeCategories={activeCategories}
             />
           )}
