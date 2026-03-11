@@ -81,11 +81,10 @@ const Index = () => {
   }, []);
 
   const handleToggleMacro = useCallback((macroId: string) => {
-    setActiveMacros(prev => {
-      if (prev.includes(macroId)) return [];
-      return [macroId];
-    });
-    // Clear active micro since we are changing the parent macro (IES)
+    setActiveMacros(prev =>
+      prev.includes(macroId) ? prev.filter(m => m !== macroId) : [...prev, macroId]
+    );
+    // Clear active micro when toggling macros to avoid invalid micro selections
     setActiveMicro(undefined);
   }, []);
 
