@@ -39,28 +39,28 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-[70px] sm:h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="flex items-center gap-4">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 group">
+            <div className="flex items-center gap-2 sm:gap-4">
               <img
                 src="https://hs.unit.br/hs-fs/hubfs/marca-fits-branca.png"
                 alt="FITS"
-                className="h-7 w-auto object-contain"
+                className="h-8 sm:h-7 w-auto object-contain max-w-[80px] sm:max-w-none"
                 style={{ filter: 'var(--logo-filter)' }}
               />
               <div className="w-px h-6 bg-border/60" />
               <img
                 src="https://hs.unit.br/hs-fs/hubfs/unit-pe-marca-w.png"
                 alt="UNIT PE"
-                className="h-7 w-auto object-contain"
+                className="h-8 sm:h-7 w-auto object-contain max-w-[80px] sm:max-w-none"
                 style={{ filter: 'var(--logo-filter)' }}
               />
               <div className="w-px h-6 bg-border/60" />
               <img
                 src="https://hs.unit.br/hs-fs/hubfs/a-web-mkt/MARCA_UNIT.png"
                 alt="UNIT"
-                className="h-7 w-auto object-contain"
+                className="h-8 sm:h-7 w-auto object-contain max-w-[80px] sm:max-w-none"
                 style={{ filter: 'var(--logo-filter)' }}
               />
             </div>
