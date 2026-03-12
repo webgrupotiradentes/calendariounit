@@ -242,7 +242,7 @@ export function EventsTable({ events, categories, onEdit, onDelete, onBulkDelete
       )}
 
       {/* ── Table ───────────────────────────────────────────────── */}
-      <div className="glass rounded-2xl overflow-hidden shadow-apple">
+      <div className="glass rounded-2xlXX overflow-hidden shadow-apple">
         <Table>
           <TableHeader>
             <TableRow className="border-border/50 hover:bg-transparent">
