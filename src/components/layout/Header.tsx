@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Calendar, Settings, Menu, X, LogIn, LogOut, Sun, Moon } from 'lucide-react';
+import { Settings, Menu, X, LogIn, LogOut, Sun, Moon, LayoutGrid } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
@@ -42,13 +42,27 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary text-primary-foreground transition-transform group-hover:scale-105">
-              <Calendar className="w-4 h-4" />
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-base font-bold text-foreground leading-tight tracking-tight">
-                Calendário UNIT
-              </h1>
+            <div className="flex items-center gap-4">
+              <img
+                src="https://hs.unit.br/hs-fs/hubfs/marca-fits-branca.png"
+                alt="FITS"
+                className="h-7 w-auto object-contain"
+                style={{ filter: 'var(--logo-filter)' }}
+              />
+              <div className="w-px h-6 bg-border/60" />
+              <img
+                src="https://hs.unit.br/hs-fs/hubfs/unit-pe-marca-w.png"
+                alt="UNIT PE"
+                className="h-7 w-auto object-contain"
+                style={{ filter: 'var(--logo-filter)' }}
+              />
+              <div className="w-px h-6 bg-border/60" />
+              <img
+                src="https://hs.unit.br/hs-fs/hubfs/a-web-mkt/MARCA_UNIT.png"
+                alt="UNIT"
+                className="h-7 w-auto object-contain"
+                style={{ filter: 'var(--logo-filter)' }}
+              />
             </div>
           </Link>
 
@@ -66,7 +80,7 @@ export function Header() {
                 Calendário
               </Button>
             </Link>
-            
+
             {isAdmin && (
               <Link to="/admin">
                 <Button
@@ -168,7 +182,7 @@ export function Header() {
                 </Button>
               </Link>
             )}
-            
+
             <Button
               variant="ghost"
               size="icon"
@@ -188,11 +202,11 @@ export function Header() {
                 variant={isActive('/') ? 'secondary' : 'ghost'}
                 className="w-full justify-start h-10 rounded-lg"
               >
-                <Calendar className="w-4 h-4 mr-2" />
+                <LayoutGrid className="w-4 h-4 mr-2" />
                 Calendário
               </Button>
             </Link>
-            
+
             {isAdmin && (
               <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button

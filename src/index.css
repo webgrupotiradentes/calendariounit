@@ -65,6 +65,9 @@
     --sidebar-accent-foreground: 220 25% 10%;
     --sidebar-border: 220 13% 90%;
     --sidebar-ring: 224 64% 33%;
+
+    /* Logo branca precisa de invert no modo claro */
+    --logo-filter: invert(1) brightness(0.25);
   }
 
   .dark {
@@ -104,6 +107,9 @@
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 220 20% 16%;
     --sidebar-ring: 217 91% 60%;
+
+    /* Logo branca mantém no modo escuro */
+    --logo-filter: none;
   }
 }
 
