@@ -1,4 +1,4 @@
-import { format, startOfYear, endOfYear, eachMonthOfInterval, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isToday } from 'date-fns';
+import { format, startOfYear, endOfYear, eachMonthOfInterval, startOfMonth, endOfMonth, eachDayOfInterval, isToday } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { CalendarEvent } from '@/types/calendar';
 import { cn } from '@/lib/utils';
@@ -15,7 +15,11 @@ export function YearView({ currentDate, events, onDateClick }: YearViewProps) {
     const months = eachMonthOfInterval({ start: yearStart, end: yearEnd });
 
     const getEventsForDay = (day: Date) => {
-        return events.filter(event => isSameDay(new Date(event.date), day));
+        const y = day.getFullYear();
+        const m = String(day.getMonth() + 1).padStart(2, '0');
+        const d = String(day.getDate()).padStart(2, '0');
+        const dateStr = `${y}-${m}-${d}`;
+        return events.filter(event => dateStr >= event.date && dateStr <= (event.endDate || event.date));
     };
 
     return (
